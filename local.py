@@ -1,28 +1,63 @@
 # import the opencv library
 import cv2
 import numpy as np
-  
+from tkinter import Tk, Scale, HORIZONTAL, Label
+
+NUM_SLIDERS = 9
+
+names = [
+    "H min",
+    "H max",
+    "S min",
+    "S max",
+    "V min",
+    "V max",
+    "Exposure",
+    "Gain",
+    "Brightness"
+]
+
 # define a video capture object
 vid = cv2.VideoCapture(0)
-  
+master = Tk()
+
+sliders = []
+slider_values = [40,100,100,255,100,255,0,1,0]
+for x in range(NUM_SLIDERS):
+    text = Label(master, text=names[x])
+    scale = Scale(master, from_=0, to=255, orient=HORIZONTAL,length=400)
+    scale.set(slider_values[x])
+    sliders.append(scale)
+    scale.pack()
+    text.pack()
+
+
 while(True):
-      
+    master.update()
+    for c, x in enumerate(sliders):
+        slider_values[c] = x.get()
+    
     # Capture the video frame
     # by frame
+
+    vid.set(cv2.CAP_PROP_EXPOSURE, slider_values[6]) 
+    vid.set(cv2.CAP_PROP_GAIN, slider_values[7]) 
+    vid.set(cv2.CAP_PROP_BRIGHTNESS, slider_values[8]) 
+
     ret, frame = vid.read()
+    raw_frame = frame
     frame = cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
     # Display the resulting frame
 
-    # 240°, 6%, 60%
-    h = 120/2
-    threshold = 20
-    hsv_low = np.array([h-threshold,100,40])
-    hsv_high = np.array([h+threshold,255,255])
-    
     h = 140/2
     threshold = 30
     hsv_low = np.array([h-threshold,40,40])
     hsv_high = np.array([h+threshold,255,255])
+
+    # 240°, 6%, 60%
+    hsv_low = np.array([slider_values[0]/2,slider_values[2],slider_values[4]])
+    hsv_high = np.array([slider_values[1]/2,slider_values[3],slider_values[5]])
+    
     # image_width = 640
     # image_height = 480
     # focal_length = 696.195
@@ -57,16 +92,18 @@ while(True):
         
         # Using cv2.circle() method
         filtered_frame = cv2.circle(filtered_frame, center_coordinates, radius, color, thickness)
-                # cv2.circle(filtered_frame,(avx/len(filtered_contours),avy/len(filtered_contours)), 3, (0,255,0), -1)
-        print("RPM: ", avy*25+3000)
+        # cv2.circle(filtered_frame,(avx/len(filtered_contours),avy/len(filtered_contours)), 3, (0,255,0), -1)
         frame_width = vid.get(cv2.CAP_PROP_FRAME_WIDTH)
-        print("WIDTH: ",frame_width)
-        print("center",avx)
-        print("Direction: ", avx-frame_width/2)
-        if avx-frame_width/2 > 0: print("turn right")
-        else: print("turn left")
-        if -50 < avx-frame_width/2 < 50: print("SHOOT")
-    cv2.imshow('frame', filtered_frame)
+        # print("RPM: ", avy*25+3000)
+        # print("WIDTH: ",frame_width)
+        # print("center",avx)
+        # print("Direction: ", avx-frame_width/2)
+        # if avx-frame_width/2 > 0: print("turn right")
+        # else: print("turn left")
+        # if -50 < avx-frame_width/2 < 50: print("SHOOT")
+    filtered_frame = cv2.flip(filtered_frame,1)
+    cv2.imshow('stuff', filtered_frame)
+
     # the 'q' button is set as the
     # quitting button you may use any
     # desired button of your choice

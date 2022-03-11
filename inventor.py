@@ -20,7 +20,7 @@ import json
 # @distribution Unrestricted
 # @restrictions None
 # @ingroup modules
-class RapidReact:
+class Final:
     # ###################################################################################################
     ## Constructor
     def __init__(self):
@@ -86,14 +86,14 @@ class RapidReact:
             # Using cv2.circle() method
             filtered_frame = cv2.circle(filtered_frame, center_coordinates, radius, color, thickness)
                     # cv2.circle(filtered_frame,(avx/len(filtered_contours),avy/len(filtered_contours)), 3, (0,255,0), -1)
-            print("RPM: ", avy*25+3000)
+            # print("RPM: ", avy*25+3000)
             frame_width = inimg.shape[1]
-            print("WIDTH: ",frame_width)
-            print("center",avx)
-            print("Direction: ", avx-frame_width/2)
-            if avx-frame_width/2 > 0: print("turn right")
-            else: print("turn left")
-            if -50 < avx-frame_width/2 < 50: print("SHOOT")
+            # print("WIDTH: ",frame_width)
+            # print("center",avx)
+            # print("Direction: ", avx-frame_width/2)
+            # if avx-frame_width/2 > 0: print("turn right")
+            # else: print("turn left")
+            # if -50 < avx-frame_width/2 < 50: print("SHOOT")
         # cv2.imshow('frame', filtered_frame)
             
         # Start measuring image processing time (NOTE: does not account for input conversion time):
@@ -125,7 +125,9 @@ class RapidReact:
         width = outimg.shape[1]
         cv2.putText(outimg, fps, (3, height - 6), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255))
         sendData = {"x":avx-frame_width/2,"y":avy}
+        sendData = {"x":100,"y":200}
         jevois.sendSerial(json.dumps(sendData))
         # Convert our output image to video output format and send to host over USB:
         outframe.sendCv(filtered_frame)
+        inframe.done()
         
