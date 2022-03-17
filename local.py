@@ -101,9 +101,10 @@ while(True):
         # if avx-frame_width/2 > 0: print("turn right")
         # else: print("turn left")
         # if -50 < avx-frame_width/2 < 50: print("SHOOT")
+        print("Angle To Turn: ", (avx-frame_width/2)*70/frame_width)
+
     filtered_frame = cv2.flip(filtered_frame,1)
     cv2.imshow('stuff', filtered_frame)
-
     # the 'q' button is set as the
     # quitting button you may use any
     # desired button of your choice
