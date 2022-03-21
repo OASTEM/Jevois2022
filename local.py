@@ -53,7 +53,6 @@ while(True):
     hsv_low = np.array([h-threshold,40,40])
     hsv_high = np.array([h+threshold,255,255])
 
-    # 240°, 6%, 60%
     hsv_low = np.array([slider_values[0]/2,slider_values[2],slider_values[4]])
     hsv_high = np.array([slider_values[1]/2,slider_values[3],slider_values[5]])
     
