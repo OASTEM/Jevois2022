@@ -1,4 +1,4 @@
-serdev = '/dev/tty.usbmodem145103' # serial device of JeVois
+serdev = '/dev/tty.usbmodem144103' # serial device of JeVois
 import serial
 # import time
 
