@@ -20,7 +20,7 @@ import json
 # @distribution Unrestricted
 # @restrictions None
 # @ingroup modules
-class Final:
+class Vision:
     # ###################################################################################################
     ## Constructor
     def __init__(self):
