@@ -19,8 +19,6 @@ names = [
 
 # define a video capture object
 vid = cv2.VideoCapture(0)
-pic = cv2.imread("visionpic.jpg")
-pic = cv2.cvtColor(pic,cv2.COLOR_RGB2HSV)
 master = Tk()
 
 sliders = []
@@ -47,7 +45,6 @@ while(True):
     vid.set(cv2.CAP_PROP_BRIGHTNESS, slider_values[8]) 
 
     ret, frame = vid.read()
-    raw_frame = frame
     frame = cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
     # Display the resulting frame
 
@@ -56,7 +53,6 @@ while(True):
     hsv_low = np.array([h-threshold,40,40])
     hsv_high = np.array([h+threshold,255,255])
 
-    # 240°, 6%, 60%
     hsv_low = np.array([slider_values[0]/2,slider_values[2],slider_values[4]])
     hsv_high = np.array([slider_values[1]/2,slider_values[3],slider_values[5]])
     
@@ -69,7 +65,6 @@ while(True):
     # centerY = 0
 
     filtered_frame = cv2.inRange(frame,hsv_low, hsv_high)
-    frame_pic = cv2.inRange(pic,hsv_low, hsv_high)
     
     contours, hierarchy = cv2.findContours(filtered_frame, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_TC89_KCOS)
     filtered_contours = []
