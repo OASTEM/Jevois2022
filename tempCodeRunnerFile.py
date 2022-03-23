@@ -1,2 +1,1 @@
-outframe.sendCv(filtered_frame)
-        inframe.done()
+serdev = '/dev/tty.usbmodem144103' # serial device of JeVois
