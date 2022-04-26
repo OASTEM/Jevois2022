@@ -51,12 +51,12 @@ class Vision:
         else:
             avx,avy = 320/2,240/2
 
-        cv2.putText(filtered_frame, "JeVois RapidReact", (3, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255))         
-        cv2.putText(filtered_frame, (3, frame_height - 6), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255))
+        # cv2.putText(filtered_frame, "JeVois RapidReact", (3, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255))         
+        # cv2.putText(filtered_frame, (3, frame_height - 6), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255))
         sendData = str((avx-frame_width/2)*60/frame_width)+";"+str(avy)
         # sendData = "10.1;3200"
         jevois.sendSerial(sendData)
-        return frame
+        return filtered_frame
 
     def process(self, inframe, outframe):
         outframe.sendCv(self.processInformation(inframe))
