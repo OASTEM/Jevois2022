@@ -10,14 +10,14 @@ class Vision:
         self.timer = jevois.Timer("processing timer", 100, jevois.LOG_INFO)
         # self.hsv_low = np.array([86, 40, 200])
         # self.hsv_high = np.array([90,230,255])
-        # self.hsv_low = np.array([70, 90, 130])
-        # self.hsv_high = np.array([85,255,255])
+        self.hsv_low = np.array([70, 40, 130])
+        self.hsv_high = np.array([90,255,255])
         # self.hsv_low = np.array([75, 50, 120])
         # self.hsv_high = np.array([90,255,255])
         # self.hsv_low = np.array([85, 40, 200])
         # self.hsv_high = np.array([90,230,255])
-        self.hsv_low = np.array([70, 100, 100])
-        self.hsv_high = np.array([150,200,255])
+        # self.hsv_low = np.array([0, 100, 100])
+        # self.hsv_high = np.array([150,200,255])
 
     def processInformation(self, inimg):
         inimg = inimg.getCvBGR()
@@ -53,7 +53,7 @@ class Vision:
 
         # cv2.putText(filtered_frame, "JeVois RapidReact", (3, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255))         
         # cv2.putText(filtered_frame, (3, frame_height - 6), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255))
-        sendData = str((avx-frame_width/2)*60/frame_width)+";"+str(avy)
+        sendData = str((avx-frame_width/2)*75/frame_width)+";"+str(avy)
         # sendData = "10.1;3200"
         jevois.sendSerial(sendData)
         return filtered_frame

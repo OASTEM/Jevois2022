@@ -1,4 +1,0 @@
-setpar serlog None
-setpar serout USB
-setmapping2 YUYV 320 240 30.0 Me Vision
-streamon

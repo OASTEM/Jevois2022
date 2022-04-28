@@ -1,0 +1,11 @@
+setpar serlog None
+setpar serout USB
+setmapping2 YUYV 320 240 30.0 Me Vision
+streamon
+
+setcam brightness -2
+setcam autoexp 1
+setcam absexp 150
+setcam autogain 0
+setcam gain 16
+setcam autowb 0

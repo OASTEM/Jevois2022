@@ -65,7 +65,8 @@ while(True):
     # centerY = 0
 
     filtered_frame = cv2.inRange(frame,hsv_low, hsv_high)
-    
+    # new_filtered_frame = filtered_frame
+    # cv2.denoise_TVL1(filtered_frame,new_filtered_frame,10,7,21)
     contours, hierarchy = cv2.findContours(filtered_frame, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_TC89_KCOS)
     filtered_contours = []
     avx,avy = 0,0
@@ -103,6 +104,7 @@ while(True):
 
     filtered_frame = cv2.flip(filtered_frame,1)
     cv2.imshow('stuff', filtered_frame)
+    cv2.imshow("more stuff", filtered_frame)
     # the 'q' button is set as the
     # quitting button you may use any
     # desired button of your choice
