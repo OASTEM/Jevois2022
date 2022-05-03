@@ -5,7 +5,8 @@ streamon
 
 setcam brightness -2
 setcam autoexp 1
-setcam absexp 150
+# setcam absexp 20 # outdoors 
+setcam absexp 150 # indoors
 setcam autogain 0
 setcam gain 16
 setcam autowb 0
